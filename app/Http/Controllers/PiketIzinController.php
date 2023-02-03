@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Izin;
 use Illuminate\Http\Request;
 
-class IzinController extends Controller
+class PiketIzinController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class IzinController extends Controller
      */
     public function index()
     {
-        return view('izinpiket.index');
+        return view('piket.izin');
     }
 
     /**

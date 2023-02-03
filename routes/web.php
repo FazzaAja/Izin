@@ -18,4 +18,5 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/izin', 'App\Http\Controllers\IzinController');
+Route::resource('/piket/izin', 'App\Http\Controllers\PiketIzinController');
+Route::resource('/piket/murid', 'App\Http\Controllers\PiketMuridController');

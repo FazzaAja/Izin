@@ -1,5 +1,7 @@
 @extends('layout.base')
- 
+
+@section('tittle', 'Piket | Data Izin')
+
 @section('content')
 
       <!-- Content Wrapper. Contains page content -->
