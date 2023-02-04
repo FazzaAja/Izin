@@ -57,7 +57,7 @@
            with font-awesome or any other icon font library -->
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Izin
@@ -81,7 +81,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="../../iframe.html" class="nav-link">
+            <a class="nav-link">
               <i class="nav-icon fas fa-solid fa-clock"></i>
               <p>
                 Keterlambatan
@@ -107,7 +107,7 @@
           {{-- <li class="nav-item menu-open"> --}}
           <li class="nav-item">
             {{-- <a href="#" class="nav-link active"> --}}
-            <a href="#" class="nav-link">
+            <a class="nav-link">
             <i class="nav-icon fas fa-solid fa-user"></i>
               <p>
                 Murid
@@ -122,13 +122,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Jurusan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
+                <a href="{{  route('murid.create')  }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Murid</p>
                 </a>
@@ -137,7 +131,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Piket

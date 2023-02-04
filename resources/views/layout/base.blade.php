@@ -30,6 +30,21 @@
     />
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css" />
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+    <link
+      rel="stylesheet"
+      href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"
+    />
+
+    <style>
+      .form-group .select2:focus {
+        border-color: #28a745 !important;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+      }
+    </style>
+  
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
@@ -70,30 +85,37 @@
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
-<!-- Page specific script -->
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+
+
 <script>
   $(function () {
+  
+    //Page specific script
     $("#example1")
       .DataTable({
         responsive: true,
         lengthChange: false,
         autoWidth: false,
-        buttons: ["pdf",],
+        buttons: ["pdf", "csv"],
       })
       .buttons()
       .container()
       .appendTo("#example1_wrapper .col-md-6:eq(0)");
-    $("#example2").DataTable({
-      paging: true,
-      lengthChange: false,
-      searching: false,
-      ordering: true,
-      info: true,
-      autoWidth: false,
-      responsive: true,
-    });
+
+    //Initialize Select2 Elements
+    $('.select2').select2({
+          theme: "bootstrap4",
+        })
+      
+    //Money Euro
+    $("[data-mask]").inputmask();
+
+
   });
 </script>
 </body>

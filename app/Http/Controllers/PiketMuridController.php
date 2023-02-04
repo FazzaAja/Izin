@@ -27,7 +27,8 @@ class PiketMuridController extends Controller
      */
     public function create()
     {
-        //
+        $jurusan = Jurusan::all();
+        return view('piket.add-murid', ['listJurusan' => $jurusan]);
     }
 
     /**
@@ -38,7 +39,16 @@ class PiketMuridController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->all();
+        $request->validate([
+            'nis' => 'required|digits_between:9,11|numeric',
+            'nama' => 'required',
+            'foto' => 'nullable|image|mimes:png,jpg,jpeg,svg,gif|max:1024',
+        ]);
+
+        // dd($requestData);
+        Murid::create($requestData);
+        return redirect('/piket/murid')->with('success', 'Sukses Menambah Murid.');
     }
 
     /**
