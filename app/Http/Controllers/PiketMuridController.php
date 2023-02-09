@@ -70,7 +70,7 @@ class PiketMuridController extends Controller
      */
     public function show(Murid $murid)
     {
-        //
+        return view('piket.detail-murid',compact('murid'));
     }
 
     /**

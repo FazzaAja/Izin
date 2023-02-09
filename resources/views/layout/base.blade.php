@@ -44,6 +44,13 @@
       rel="stylesheet"
       href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"
     />
+
+    <style>
+      .image-128x128 {
+        width: 120px;
+        height: 120px;
+      }
+    </style>
   
   </head>
 

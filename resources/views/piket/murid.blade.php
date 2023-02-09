@@ -55,7 +55,7 @@
                   @foreach ( $listMurid as $murid )
                   <tr>
                     <td>{{ $murid->kelas }} {{ $murid->jurusan['jurusan'] }}</td>
-                    <td>{{ strtoupper($murid->nama) }}</td>
+                    <td><a href="{{ route('murid.show',$murid->id) }}">{{ strtoupper($murid->nama) }}</a></td>
                     <td>{{ $murid->nisn }}</td>
                     <td>
                       @if ($murid->jk == 'L')
