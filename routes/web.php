@@ -19,4 +19,9 @@ Route::get('/', function () {
 
 
 Route::resource('/piket/izin', 'App\Http\Controllers\PiketIzinController');
-Route::resource('/piket/murid', 'App\Http\Controllers\PiketMuridController');
+Route::get('/piket/murid', 'App\Http\Controllers\PiketMuridController@index')->name('murid.index');
+Route::get('/piket/murid/tambah-murid', 'App\Http\Controllers\PiketMuridController@create')->name('murid.create');
+Route::post('/piket/murid/', 'App\Http\Controllers\PiketMuridController@store')->name('murid.store');
+Route::get('/piket/export-murid', 'App\Http\Controllers\PiketMuridController@export')->name('murid.export');
+Route::post('/piket/import-murid/', 'App\Http\Controllers\PiketMuridController@import')->name('murid.import');
+

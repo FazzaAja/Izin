@@ -15,11 +15,13 @@ class Murid extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nis',
-        'foto',
         'nama',
+        'nisn',
+        'nipd',
         'kelas',
         'jurusan_id',
+        'jk',
+        'foto',
         'alamat',
         'phone',
     ];

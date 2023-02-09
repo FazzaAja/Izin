@@ -8,43 +8,74 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Tambah Data Murid</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{  route('murid.index')  }}">Murid</a></li>
+            <li class="breadcrumb-item active">Tambah-Murid</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+ 
+  @if ($errors->any())
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="alert alert-danger block">
+              <strong>Ada beberapa masalah dengan inputannya!<br><br>
+              <ul class="block">
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li><br>
+                  @endforeach
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  @endif
+
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
       <div class="row">
         <!-- left column -->
         <div class="col-md-8">
-          @if ($errors->any())
-            <div class="text-center alert alert-danger block ">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul class="block">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li><br>
-                    @endforeach
-                </ul>
-            </div>
-          @endif
           <!-- general form elements -->
           <div class="card card-primary">
+            {{-- <form action="{{ route('murid.import') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <div>
+                <input type="file" name="file" class="form-control">
+                <br>
+                <button class="btn btn-success">Import User Data</button>
+              </div>
+            </form>
+            <a class="btn btn-warning float-end" href="{{ route('murid.export') }}">Export User Data</a> --}}
+
             <div class="card-header">
               <h3 class="card-title">Form Tambah Murid</h3>
+              <a href="" class="btn btn-light text-dark float-right ">Import</a>
             </div>
+            
             <!-- /.card-header -->
             <!-- form start -->
             <form action="/piket/murid" method="post">
               @csrf
               <div class="card-body">
-                <div class="form-group">
-                  <label for="nis">NIS</label>
-                  <input
-                    type="text"
-                    name="nis"
-                    class="form-control"
-                    id="nis"
-                    placeholder="Masukan NIS"
-                    required
-                  />
-                </div>
+                <h4>Wajib di isi</h4>
+                <br>
                 <div class="form-group">
                   <label for="nama">Nama</label>
                   <input
@@ -57,30 +88,35 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="foto">Foto Profie</label>
-                  <div class="input-group">
-                    <div class="custom-file">
-                      <input
-                        type="file"
-                        name="foto"
-                        class="custom-file-input"
-                        id="foto"
-                      />
-                      <label class="custom-file-label" for="foto">Pilih</label>
-                    </div>
-                    <div class="input-group-append">
-                      <span class="input-group-text">Upload</span>
-                    </div>
-                  </div>
+                  <label for="nisn">NISN</label>
+                  <input
+                    type="number"
+                    name="nisn"
+                    class="form-control"
+                    id="nisn"
+                    placeholder="Masukan NISN"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="nipd">NIPD</label>
+                  <input
+                    type="number"
+                    name="nipd"
+                    class="form-control"
+                    id="nipd"
+                    placeholder="Masukan NIPD"
+                    required
+                  />
                 </div>
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-3">
                     <div class="form-group">
                       <label for="Kelas">Kelas</label>
                       <select
-                        class="custom-select form-control-border .border-width-2"
-                        name="kelas"
-                        id="Kelas"
+                      class="form-control"
+                      name="kelas"
+                      id="Kelas"
                       >
                         <option>X</option>
                         <option>XI</option>
@@ -88,23 +124,59 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-3">
                     <div class="form-group">
                       <label>Jurusan</label>
                       <select
-                        class="select2"
+                      class="select2"
                         name="jurusan_id"
                         style="width: 100%"
                       >
-                        <option selected="selected">Pilih Jurusan</option>
+                      <option selected="selected">Pilih Jurusan</option>
                         @foreach ( $listJurusan as $jurusan )
-                          <option value="{{ $jurusan->id }}" >{{ $jurusan->jurusan }}</option>
+                        <option value="{{ $jurusan->id }}" >{{ $jurusan->jurusan }}</option>
                         @endforeach
                       </select>
                     </div>
                   </div>
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label for="jk">Jenis Kelamin</label>
+                      <select
+                      class="custom-select form-control-border .border-width-2"
+                      name="jk"
+                      id="jk"
+                      >
+                      <option value="L" >Laki-laki</option>
+                      <option value="P" >Perempuan</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="form-group">
+              </div>
+
+              <br>
+              <h4>opsional</h4>
+              <br>
+
+              <div class="form-group">
+                <label for="foto">Foto Profie</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input
+                      type="file"
+                      name="foto"
+                      class="custom-file-input"
+                      id="foto"
+                    />
+                    <label class="custom-file-label" for="foto">Pilih</label>
+                  </div>
+                  <div class="input-group-append">
+                    <span class="input-group-text">Upload</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
                   <label>Alamat</label>
                   <textarea
                     class="form-control"

@@ -116,7 +116,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/piket/murid" class="nav-link">
+                <a href="{{  route('murid.index')  }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Murid</p>
                 </a>

@@ -15,6 +15,13 @@
       rel="stylesheet"
       href="../../plugins/fontawesome-free/css/all.min.css"
     />
+
+    <!-- SweetAlert2 -->
+    <link
+      rel="stylesheet"
+      href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"
+    />
+    
     <!-- DataTables -->
     <link
       rel="stylesheet"
@@ -37,13 +44,6 @@
       rel="stylesheet"
       href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"
     />
-
-    <style>
-      .form-group .select2:focus {
-        border-color: #28a745 !important;
-        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
-      }
-    </style>
   
   </head>
 
@@ -90,10 +90,31 @@
 <!-- InputMask -->
 <script src="../../plugins/moment/moment.min.js"></script>
 <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
-
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
 
 <script>
   $(function () {
+
+
+    //SweetAlert2 Modal
+    $(function () {
+        var Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+
+        $(document).ready(function () {
+          if ($("#addMurid").length) {
+            Toast.fire({
+              icon: "success",
+              title: "Sukses Menambah Murid.",
+            });
+          }
+        });
+      });
   
     //Page specific script
     $("#example1")

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Murid;
 use App\Models\Jurusan;
+use Illuminate\Contracts\Session\Session;
+use App\Exports\MuridExport;
+use App\Imports\MuridImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class PiketMuridController extends Controller
@@ -28,7 +32,7 @@ class PiketMuridController extends Controller
     public function create()
     {
         $jurusan = Jurusan::all();
-        return view('piket.add-murid', ['listJurusan' => $jurusan]);
+        return view('piket.tambah-murid', ['listJurusan' => $jurusan]);
     }
 
     /**
@@ -40,10 +44,17 @@ class PiketMuridController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
+
+
+
         $request->validate([
-            'nis' => 'required|digits_between:9,11|numeric',
+            'nisn' => 'digits:10|numeric|unique:murid,nisn',
+            'nipd' => 'digits_between:9,15|numeric|unique:murid,nisn',
             'nama' => 'required',
             'foto' => 'nullable|image|mimes:png,jpg,jpeg,svg,gif|max:1024',
+        ],[
+            'nisn.digits' => 'NISN harus 10 digit', 
+            'nisn.digits_between' => 'NIPD harus antara 9 sampai 15 digit', 
         ]);
 
         // dd($requestData);
@@ -94,5 +105,23 @@ class PiketMuridController extends Controller
     public function destroy(Murid $murid)
     {
         //
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function export() 
+    {
+        return Excel::download(new MuridExport, 'data-murid-SMKN4TSM.xlsx');
+    }
+       
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function import() 
+    {
+        Excel::import(new MuridImport,request()->file('file'));
+               
+        return back();
     }
 }

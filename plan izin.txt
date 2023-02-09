@@ -36,14 +36,13 @@ Field:
 Field:
 0. id Int primary
 1. CreatedAt Date auto
-2. kelas Selection 
-3. jurusan Selection
-4. nama Varchar 
+2. Jam ke Selection
+3. Murid selection fk(Murid) 
 5. Alasan Text
 6. FotoBuktiKeluar Img
 7. FotoBuktiKembali Img
 8. Status Selection
-9. piket Selection
+9. piket Auth fk(Piket)
 10. UpdateAt Date auto
 
 - Table Telat 

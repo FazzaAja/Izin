@@ -12,10 +12,9 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1>Data Murid</h1>
+          
           @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-              <p>{{ $message }}</p>
-            </div>
+           <div id="addMurid"></div>
           @endif
         </div>
         <div class="col-sm-6">
@@ -37,31 +36,35 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Table Murid</h3>
+              
+              <a href="{{  route('murid.create')  }}" class="btn btn-primary float-right">Tambah Murid</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>NIS</th>
-                    <th>Nama</th>
-                    <th>Foto</th>
                     <th>Kelas</th>
-                    <th>Jurusan</th>
-                    <th>Alamat</th>
-                    <th>Nomer HP</th>
+                    <th>Nama</th>
+                    <th>NISN</th>
+                    <th>Jenis Kelamin</th>
+                    <th>NIPD</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ( $listMurid as $murid )
                   <tr>
-                    <td>{{ $murid->nis }}</td>
-                    <td>{{ $murid->nama }}</td>
-                    <td>{{ $murid->foto }}</td>
-                    <td>{{ $murid->kelas }}</td>
-                    <td>{{ $murid->jurusan['jurusan'] }}</td>
-                    <td>{{ $murid->alamat }}</td>
-                    <td>{{ $murid->phone }}</td>
+                    <td>{{ $murid->kelas }} {{ $murid->jurusan['jurusan'] }}</td>
+                    <td>{{ strtoupper($murid->nama) }}</td>
+                    <td>{{ $murid->nisn }}</td>
+                    <td>
+                      @if ($murid->jk == 'L')
+                        Laki-laki
+                      @else
+                        Perempuan
+                      @endif
+                    </td>
+                    <td>{{ $murid->nipd }}</td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -94,14 +97,14 @@
                 <thead>
                   <tr>
                     <th>Jurusan</th>
-                    <th></th>
+                    <th>id</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ( $listJurusan as $jurusan )
                   <tr>
                     <td>{{ $jurusan->jurusan }}</td>
-                    <td><a href="#">edit</a></td>
+                    <td>{{ $jurusan->id }}</td>
                   </tr>
                   @endforeach
                 </tbody>
