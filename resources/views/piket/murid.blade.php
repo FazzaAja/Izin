@@ -22,6 +22,15 @@
           @if ($message = Session::get('successImport'))
            <div id="importMurid"></div>
           @endif
+          @if ($message = Session::get('addJurusan'))
+           <div id="addJurusan"></div>
+          @endif
+          @if ($message = Session::get('editJurusan'))
+           <div id="editJurusan"></div>
+          @endif
+          @if ($message = Session::get('deleteJurusan'))
+           <div id="deleteJurusan"></div>
+          @endif
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -105,12 +114,12 @@
                       <form action="{{ route('murid.destroy',$murid->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#example">
                           <i class="fas fa-solid fa-trash fa-xs"></i>
                         </button>
         
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -120,7 +129,7 @@
                                 </button>
                               </div>
                               <div class="modal-body">
-                                Yakin ingin menghapu data murid {{ $murid->nama }}?
+                                Yakin ingin menghapus data murid {{ $murid->nama }}?
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
@@ -134,17 +143,6 @@
                   </tr>
                   @endforeach
                 </tbody>
-                {{--
-                <tfoot>
-                  <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                  </tr>
-                </tfoot>
-                --}}
               </table>
             </div>
             <!-- /.card-body -->
@@ -164,6 +162,11 @@
                   <tr>
                     <th>Jurusan</th>
                     <th>id</th>
+                    <th>
+                      <center>
+                        #
+                      </center>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -171,6 +174,91 @@
                   <tr>
                     <td>{{ $jurusan->jurusan }}</td>
                     <td>{{ $jurusan->id }}</td>
+                    <td>
+                      <center>
+                        <form action="{{ route('jurusan.destroy',$jurusan->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exa{{ $jurusan->id }}">
+                            <i class="fas fa-edit fa-xs"></i>
+                          </button>
+                          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#ple{{ $jurusan->id }}">
+                            <i class="fas fa-solid fa-trash fa-xs"></i>
+                          </button>
+          
+                          <!-- Modal -->
+                          <div class="modal fade" id="ple{{ $jurusan->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Hapus Jurusan</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  Yakin ingin menghapus jurusan {{ $jurusan->jurusan }}?<br>
+                                  Data murid yang ada di dalam jurusan {{ $jurusan->jurusan }} juga akan terhapus semua!
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                  <button type="submit" class="btn btn-danger">Hapus</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exa{{ $jurusan->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ubah Jurusan</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <form action="{{ route('jurusan.update', $jurusan->id) }}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
+                                  <div class="card-body">
+                                    {{-- <div class="form-group">
+                                      <label for="id">id</label>
+                                      <input
+                                        type="number"
+                                        name="id"
+                                        class="form-control"
+                                        id="id"
+                                        placeholder="Masukan id"
+                                      />
+                                    </div> --}}
+                                    <div class="form-group">
+                                      <label for="jurusan">Jurusan</label>
+                                      <input
+                                        type="text"
+                                        name="jurusan"
+                                        class="form-control"
+                                        id="jurusan"
+                                        placeholder="Masukan Jurusan"
+                                        value="{{ $jurusan->jurusan }}"
+                                      />
+                                    </div>
+                                    <!-- /.input group -->
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                  <button type="submit" class="btn btn-primary">Ubah</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </center>
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>

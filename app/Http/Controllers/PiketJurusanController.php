@@ -35,7 +35,10 @@ class PiketJurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Jurusan::create($request->all());
+       
+        return redirect()->route('murid.index')
+                        ->with('AddJurusan','P');
     }
 
     /**
@@ -69,7 +72,11 @@ class PiketJurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        //
+        $jurusan->update($request->all());
+        
+      
+        return redirect()->route('murid.index')
+                        ->with('editJurusan','P');
     }
 
     /**
@@ -80,6 +87,9 @@ class PiketJurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        //
+        $jurusan->delete();
+       
+        return redirect()->route('murid.index')
+                        ->with('deleteJurusan','S');
     }
 }

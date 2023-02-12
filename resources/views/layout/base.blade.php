@@ -45,8 +45,6 @@
       href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"
     />
 
-    @livewireStyles
-
     <style>
       .image-128x128 {
         width: 120px;
@@ -138,6 +136,24 @@
             Toast.fire({
               icon: "success",
               title: "Sukses Mengimport Murid.",
+            });
+          }
+          if ($("#addJurusan").length) {
+            Toast.fire({
+              icon: "success",
+              title: "Sukses Menambah Jurusan.",
+            });
+          }
+          if ($("#editJurusan").length) {
+            Toast.fire({
+              icon: "success",
+              title: "Sukses Mengubah Jurusan.",
+            });
+          }
+          if ($("#deleteJurusan").length) {
+            Toast.fire({
+              icon: "success",
+              title: "Sukses Menghapus Jurusan.",
             });
           }
         });

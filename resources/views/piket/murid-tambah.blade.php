@@ -226,9 +226,19 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/piket/murid" method="post">
+            <form action="{{ route('jurusan.store') }}" method="post">
               @csrf
               <div class="card-body">
+                {{-- <div class="form-group">
+                  <label for="id">id</label>
+                  <input
+                    type="number"
+                    name="id"
+                    class="form-control"
+                    id="id"
+                    placeholder="Masukan id"
+                  />
+                </div> --}}
                 <div class="form-group">
                   <label for="jurusan">Jurusan</label>
                   <input

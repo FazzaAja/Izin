@@ -12,6 +12,7 @@ class Jurusan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'jurusan',
     ];
 

@@ -26,6 +26,7 @@ class PiketMuridController extends Controller
     }
 
     /**
+     * 2
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -42,7 +43,7 @@ class PiketMuridController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MuridFormRequest $request)
+    public function store(MuridFormRequest $request, Request $req)
     {
         $data = $request->validated();
         Murid::create($data);

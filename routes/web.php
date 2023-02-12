@@ -31,8 +31,8 @@ Route::delete('/murid/{murid}', 'App\Http\Controllers\PiketMuridController@destr
 Route::delete('/murid', 'App\Http\Controllers\PiketMuridController@deleteAll')->name('murid.deleteall');
 
 Route::get('/export-murid', 'App\Http\Controllers\PiketMuridController@export')->name('murid.export');
-// Route::get('/murid/import-murid', function () {
-//     return view('piket.murid-import');
-// });
 Route::post('/import-murid/', 'App\Http\Controllers\PiketMuridController@import')->name('murid.import');
 
+Route::post('/jurusan/', 'App\Http\Controllers\PiketJurusanController@store')->name('jurusan.store');
+Route::put('/jurusan/{jurusan}', 'App\Http\Controllers\PiketJurusanController@update')->name('jurusan.update');
+Route::delete('/jurusan/{jurusan}', 'App\Http\Controllers\PiketJurusanController@destroy')->name('jurusan.destroy');
