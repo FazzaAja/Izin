@@ -11,6 +11,9 @@
             <div class="row mb-2">
               <div class="col-sm-6">
                 <h1>Detail Murid</h1>
+                @if ($message = Session::get('successEdit'))
+                    <div id="editMurid"></div>
+                @endif
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -63,8 +66,14 @@
                             @endif</a>
                         </li>
                     </ul>
-    
-                    <a href="#" class="btn btn-primary btn-block"><b>Ubah Siswa</b></a>
+                    <center>
+                        <form action="{{ route('murid.destroy',$murid->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <a href="{{ route('murid.edit',$murid->id) }}" class="btn btn-primary"><b>Ubah Murid </b></a>
+                            <button class="btn btn-danger"><i class="fas fa-solid fa-trash"></i></button>
+                        </form>
+                        </center>
                     </div>
                     <!-- /.card-body -->
                 </div>

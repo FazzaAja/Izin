@@ -19,7 +19,7 @@ class MuridExport implements WithHeadings
      */
     public function headings(): array
     {
-        return ["Nama", "NISN", "NIPD", "Kelas", "ID Jurusan", "JK"];
+        return ["nama", "nisn", "nipd", "kelas", "jurusan_id", "jk"];
     }
 
     /**

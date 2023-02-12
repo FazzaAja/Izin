@@ -66,12 +66,12 @@
 
             <div class="card-header">
               <h3 class="card-title">Form Tambah Murid</h3>
-              <a href="" class="btn btn-light text-dark float-right ">Import</a>
+              {{-- <a href="/murid/import-murid" class="btn btn-light text-dark float-right ">Import</a> --}}
             </div>
             
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/piket/murid" method="post">
+            <form action="{{ route('murid.store') }}" method="post">
               @csrf
               <div class="card-body">
                 <h4>Wajib di isi</h4>
@@ -242,9 +242,44 @@
                 <!-- /.input group -->
               </div>
               <!-- /.card-body -->
-
+  
               <div class="card-footer text-right">
                 <button type="submit" class="btn btn-secondary">Submit</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Import Murid</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="{{ route('murid.import') }}" method="post" enctype="multipart/form-data">
+              @csrf
+              <div class="card-body">
+                <h4>Peraturan</h4>
+                <ul>
+                  <li>Unduh terlebih dahulu templete excel pada icon download <a class="btn btn-light float-right" href="{{ route('murid.export') }}"><i class="fas fa-solid fa-download"></i></a></li>
+                  <br>
+                  <li>Ikuti field pada template yang sudah tersedia untuk memasukan data murid</li>
+                  <br>
+                  <li>Untuk <i>jurusan id</i> bisa dilihat di <a href="{{ route('murid.index') }}">Table Jurusan</a></li>
+                  <br>
+                  <li>Pilih file yang sudah di isi data murid lalu import</li>
+                  <br>
+                  <li>Jika mengImport data yang sama maka akan terjadi ada dua data yang sama pada table murid</li>
+                </ul>
+                
+                <div class="form-group">
+                  <input type="file" name="file" id="file">
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.card-body -->
+  
+              <div class="card-footer text-right">
+                <button type="submit" class="btn btn-success">Import</button>
               </div>
             </form>
           </div>

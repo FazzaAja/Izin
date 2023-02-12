@@ -13,8 +13,14 @@
         <div class="col-sm-6">
           <h1>Data Murid</h1>
           
-          @if ($message = Session::get('success'))
+          @if ($message = Session::get('successAdd'))
            <div id="addMurid"></div>
+          @endif
+          @if ($message = Session::get('successDelete'))
+           <div id="deleteMurid"></div>
+          @endif
+          @if ($message = Session::get('successImport'))
+           <div id="importMurid"></div>
           @endif
         </div>
         <div class="col-sm-6">
@@ -37,7 +43,36 @@
             <div class="card-header">
               <h3 class="card-title">Table Murid</h3>
               
-              <a href="{{  route('murid.create')  }}" class="btn btn-primary float-right">Tambah Murid</a>
+              <form action="{{ route('murid.deleteall') }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#exampleModal">
+                  Hapus Massal
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Massal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Yakin ingin menghapus massal data murid?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <a href="{{  route('murid.create')  }}" class="btn btn-primary float-right mr-2"><i class="fas fa-solid fa-user-plus"></i></a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -49,6 +84,7 @@
                     <th>NISN</th>
                     <th>Jenis Kelamin</th>
                     <th>NIPD</th>
+                    <th>#</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -65,6 +101,36 @@
                       @endif
                     </td>
                     <td>{{ $murid->nipd }}</td>
+                    <td>
+                      <form action="{{ route('murid.destroy',$murid->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                          <i class="fas fa-solid fa-trash fa-xs"></i>
+                        </button>
+        
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Hapus Murid</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                Yakin ingin menghapu data murid {{ $murid->nama }}?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>

@@ -9,6 +9,7 @@ use App\Exports\MuridExport;
 use App\Imports\MuridImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use App\Http\Requests\MuridFormRequest;
 
 class PiketMuridController extends Controller
 {
@@ -32,7 +33,7 @@ class PiketMuridController extends Controller
     public function create()
     {
         $jurusan = Jurusan::all();
-        return view('piket.tambah-murid', ['listJurusan' => $jurusan]);
+        return view('piket.murid-tambah', ['listJurusan' => $jurusan]);
     }
 
     /**
@@ -41,25 +42,11 @@ class PiketMuridController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MuridFormRequest $request)
     {
-        $requestData = $request->all();
-
-
-
-        $request->validate([
-            'nisn' => 'digits:10|numeric|unique:murid,nisn',
-            'nipd' => 'digits_between:9,15|numeric|unique:murid,nisn',
-            'nama' => 'required',
-            'foto' => 'nullable|image|mimes:png,jpg,jpeg,svg,gif|max:1024',
-        ],[
-            'nisn.digits' => 'NISN harus 10 digit', 
-            'nisn.digits_between' => 'NIPD harus antara 9 sampai 15 digit', 
-        ]);
-
-        // dd($requestData);
-        Murid::create($requestData);
-        return redirect('/piket/murid')->with('success', 'Sukses Menambah Murid.');
+        $data = $request->validated();
+        Murid::create($data);
+        return redirect()->route('murid.index')->with('successAdd', 'Sukses Menambah Murid.');
     }
 
     /**
@@ -70,7 +57,7 @@ class PiketMuridController extends Controller
      */
     public function show(Murid $murid)
     {
-        return view('piket.detail-murid',compact('murid'));
+        return view('piket.murid-detail',compact('murid'));
     }
 
     /**
@@ -81,7 +68,8 @@ class PiketMuridController extends Controller
      */
     public function edit(Murid $murid)
     {
-        //
+        $jurusan = Jurusan::all();
+        return view('piket.murid-ubah',['listJurusan' => $jurusan], compact('murid'));
     }
 
     /**
@@ -91,9 +79,15 @@ class PiketMuridController extends Controller
      * @param  \App\Models\Murid  $murid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Murid $murid)
+    public function update(MuridFormRequest $request, Murid $murid)
     {
-        //
+        $data = $request->validated();
+        $murid->fill($data);
+        $murid->save();
+      
+        return redirect()->route('murid.show',$murid->id)
+                        ->with('successEdit','Sukses Mengubah Murid');
+
     }
 
     /**
@@ -104,7 +98,17 @@ class PiketMuridController extends Controller
      */
     public function destroy(Murid $murid)
     {
-        //
+        $murid->delete();
+       
+        return redirect()->route('murid.index')
+                        ->with('successDelete','Sukses menghapus murid');
+    }
+
+    public function deleteAll()
+    {
+        Murid::query()->delete();
+
+        return redirect()->route('murid.index')->with('successDelete','Sukses menghapus murid');
     }
 
     /**
@@ -114,7 +118,7 @@ class PiketMuridController extends Controller
     {
         return Excel::download(new MuridExport, 'data-murid-SMKN4TSM.xlsx');
     }
-       
+    
     /**
     * @return \Illuminate\Support\Collection
     */
@@ -122,6 +126,7 @@ class PiketMuridController extends Controller
     {
         Excel::import(new MuridImport,request()->file('file'));
                
-        return back();
+        return redirect()->route('murid.index')->with('successImport','Sukses mengimport murid');
     }
+
 }

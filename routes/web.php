@@ -18,13 +18,21 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/piket/izin', 'App\Http\Controllers\PiketIzinController');
+Route::resource('/izin', 'App\Http\Controllers\PiketIzinController');
 
-Route::get('/piket/murid', 'App\Http\Controllers\PiketMuridController@index')->name('murid.index');
-Route::get('/piket/murid/tambah-murid', 'App\Http\Controllers\PiketMuridController@create')->name('murid.create');
-Route::post('/piket/murid/', 'App\Http\Controllers\PiketMuridController@store')->name('murid.store');
-Route::get('/piket/murid/{murid}', 'App\Http\Controllers\PiketMuridController@show')->name('murid.show');
+Route::get('/murid', 'App\Http\Controllers\PiketMuridController@index')->name('murid.index');
+Route::get('/murid/tambah-murid', 'App\Http\Controllers\PiketMuridController@create')->name('murid.create');
+Route::post('/murid/', 'App\Http\Controllers\PiketMuridController@store')->name('murid.store');
+Route::get('/murid/{murid}', 'App\Http\Controllers\PiketMuridController@show')->name('murid.show');
+Route::get('/murid/{murid}/ubah-murid', 'App\Http\Controllers\PiketMuridController@edit')->name('murid.edit');
+Route::put('/murid/{murid}', 'App\Http\Controllers\PiketMuridController@update')->name('murid.update');
+Route::delete('/murid/{murid}', 'App\Http\Controllers\PiketMuridController@destroy')->name('murid.destroy');
+Route::delete('/murid/{murid}', 'App\Http\Controllers\PiketMuridController@destroy')->name('murid.destroy');
+Route::delete('/murid', 'App\Http\Controllers\PiketMuridController@deleteAll')->name('murid.deleteall');
 
-Route::get('/piket/export-murid', 'App\Http\Controllers\PiketMuridController@export')->name('murid.export');
-Route::post('/piket/import-murid/', 'App\Http\Controllers\PiketMuridController@import')->name('murid.import');
+Route::get('/export-murid', 'App\Http\Controllers\PiketMuridController@export')->name('murid.export');
+// Route::get('/murid/import-murid', function () {
+//     return view('piket.murid-import');
+// });
+Route::post('/import-murid/', 'App\Http\Controllers\PiketMuridController@import')->name('murid.import');
 
