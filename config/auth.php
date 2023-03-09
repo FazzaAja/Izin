@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'murid',
-        'passwords' => 'murid_users',
+        'guard' => 'piket',
+        'passwords' => 'pikets',
     ],
 
     /*
@@ -38,11 +38,11 @@ return [
     'guards' => [
         'piket' => [
             'driver' => 'session',
-            'provider' => 'piket_users',
+            'provider' => 'pikets',
         ],
         'murid' => [
             'driver' => 'session',
-            'provider' => 'murid_users',
+            'provider' => 'murids',
         ],
     ],
 
@@ -64,15 +64,15 @@ return [
     */
 
     'providers' => [
-        'piket_users' => [
+        'pikets' => [
             'driver' => 'eloquent',
+            'table' => 'piket',
             'model' => App\Models\Piket::class,
         ],
-        'murid_users' => [
+        'murids' => [
             'driver' => 'eloquent',
+            'table' => 'murid',
             'model' => App\Models\Murid::class,
-            'identifier' => 'nisn',
-            'other_key' => 'nama'    
         ],
 
         // 'users' => [
@@ -81,19 +81,6 @@ return [
         // ],
     ],
 
-    'passwords' => [
-        'murid_users' => [
-            'provider' => 'murid_users',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-    ],
-    'auth_custom' => [
-        'driver' => 'murid',
-        'provider' => 'murid_users',
-        'input_key' => 'nisn',
-    ],
     
 
     /*
@@ -112,8 +99,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'pikets' => [
+            'provider' => 'pikets',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

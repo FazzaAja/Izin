@@ -32,6 +32,8 @@
       <div class="container">
         <div class="row">
             <div class="col-md-12 " id="accordion">
+              @if (count($listIzin) > 0)
+              
                 @foreach ($listIzin as $izin)
                 <div class="card
                 @if ($izin->status == 'Sudah Kembali')
@@ -47,37 +49,36 @@
                     <a class="d-block w-100" href="{{ route('show', $izin->id) }}">
                         <div class="card-header">
                             <h5 class="card-title w-100 text-dark">
-                                {{ ucwords(strtolower($izin->murid->nama)) }} <div class="float-right"><strong>{{ $izin->created_at->format('H:i') }}</strong></div>
+                              <div class="float-right"><strong>{{ $izin->created_at->format('H:i') }}</strong></div>  <li>{{ ucwords(strtolower($izin->murid->nama)) }}</li> 
                             </h5>
                             <br>
-                            <h5 class="card-title w-100 text-dark"><strong>Alasan :</strong> {{ $izin->alasan }}</h5>
+                            <h5 class="card-title w-100 text-dark"><li><strong>Alasan :</strong> {{ $izin->alasan }}</li></h5>
                             <br>
                             <h5 class="card-title w-100">
                                 {{ $izin->created_at->translatedFormat('l, d F Y') }} <div class="float-right"></div>
                             </h5>
                         </div>
                     </a>
-                    {{-- <div id="collapse{{ $izin->id }}" class="collapse" data-parent="#accordion">
-                        <div class="card-body">
-                            <h6><strong>Status :</strong> <span class="badge badge-pill 
-                                @if ($izin->status == 'Sudah Kembali')
-                                badge-success
-                                @elseif ($izin->status == 'Sudah Pulang')
-                                badge-success
-                                @elseif ($izin->status == 'Tanpa Keterangan')
-                                badge-danger
-                                @else
-                                badge-warning
-                                @endif
-                                ">{{ $izin->status }}</span>
-                            </h6>
-                            <h6><strong>Piket :</strong> {{ $izin->piket->nama }}</h6>
-                        </div>
-                    </div> --}}
                 </div>
+                
                 @endforeach
-    
+
+              @else
+
+              <div class="card bg-gradient-secondary">
+                <div class="card-header">
+                    <center>
+                        <h5 class="card-title w-100 mt-3 mb-3">
+                            Belum ada izin yang dilakukan
+                        </h5>
+                    </center>
+                </div>
               </div>
+                
+              @endif
+
+    
+            </div>
               <!-- /.col -->
           
           <!-- /.col-->

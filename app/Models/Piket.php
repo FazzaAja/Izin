@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use App\Http\Middleware\Authenticate;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 
 class Piket extends Authenticatable
 {
-    public $table = "piket";
+    // use HasFactory;
 
-    use HasFactory;
+    protected $table = 'piket';
+
 
     protected $fillable = [
         'nama',

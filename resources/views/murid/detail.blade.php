@@ -1,6 +1,6 @@
 @extends('template.base')
 
-@section('tittle', 'Piket | Detail Izin')
+@section('tittle', 'Detail Izin '.ucwords(strtolower(auth('murid')->user()->nama)))
 
 @section('content')
 
@@ -16,6 +16,7 @@
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{ route('profile') }}">Izin</a></li>
                   <li class="breadcrumb-item active">Detail</li>
                 </ol>
               </div>
@@ -32,7 +33,7 @@
                     
                     <!-- Main content -->
                     <div class="invoice p-3 mb-3">
-                     <form action="{{ route('izin.update', $izin->id) }}" method="post">
+                     <form action="{{ route('foto',$izin->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <!-- title row -->
@@ -182,6 +183,8 @@
                               badge-warning
                             @endif
                               ">{{ $izin->status }}</span>
+
+                            
                           </div>
                           <!-- /.col -->
 
@@ -190,27 +193,102 @@
                         <!-- /.row -->
 
                         
+                        <div class="row invoice-info">
+                          <div class="col-sm-6 invoice-col">
+                            <br>
+                            <center>
+                              <div class="image">
+                                <input type="file" name="keluar" id="keluar" onchange="previewImage()" style="display: none">
+                                <label for="keluar">Foto Keluar<br>
+                                {{-- <img class="img-preview" src="#" alt="Preview Photo"> --}}
+                                @if ($izin->keluar)
+                                <br>
+                                <img
+                                  src="{{ url('storage/'.$izin->keluar) }}"
+                                  class="img mr-2 text-primary img-preview"
+                                  alt="User Image"
+                                  height="300"
+                                /> 
+                                  
+                                @else
+                                <br>
+                                <img
+                                  src="../../dist/img/square-plus-regular.svg"
+                                  class="img mr-2 text-primary img-preview"
+                                  alt="Foto Keluar"
+                                  height="300"
+                                /> 
+                                  
+                                @endif
+                                </label>
+                              </div>
+                            </center>
+                          </div>
+                          <div class="col-sm-6 invoice-col">
+                            <br>
+                            <center>
+                              <div class="image">
+                                <label for="">Foto Kembali</label><br>
+                                @if ($izin->kembali)
+                                <img
+                                  src="../../dist/img/lol.jpg"
+                                  class="img mr-2 text-primary "
+                                  alt="User Image"
+                                  width="100" height="150"
+                                /> 
+                                  
+                                @else
+                                <img
+                                  src="../../dist/img/square-plus-regular.svg"
+                                  class="img mr-2 text-primary "
+                                  alt="Foto Kembali"
+                                  width="100" height="150"
+                                /> 
+                                  
+                                @endif
+  
+                              </div>
+                            </center>
+                          </div>
+                        </div>
+                        <div class="row invoice-info">
+                          <div class="col-sm-12 invoice-col">
+                            <br>
+                                <div class="float-right">
+                                    <button type="submit" class="btn btn-success">
+                                    Simpan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- this row will not appear when printing -->
+                        
+                            
                       </div>
                       <!-- /.invoice -->
-                     
+                     </form>
                     </div>
               </div>
             </div>
           </div>
         </section>
-        <footer class="main-footer">
-            <!-- To the right -->
-            {{-- <div class="float-right d-none d-sm-inline">Anything you want</div> --}}
-            <!-- Default to the left -->
-            <center>
-                <strong
-                  >Copyright <sup style=>&copy;</sup>
-                  <a href="https://www.instagram.com/dvethree_4/">DVTHREE 4</a>.</strong
-                >
-                All rights reserved.
 
-            </center>
-        </footer>
+          <!-- Main Footer -->
+<footer class="main-footer">
+    <!-- To the right -->
+    {{-- <div class="float-right d-none d-sm-inline">Anything you want</div> --}}
+    <!-- Default to the left -->
+    <center>
+      <strong
+        >Copyright <sup style=>&copy;</sup>
+        <a href="https://www.instagram.com/dvethree_4/">DVTHREE 4</a>.</strong
+      >
+      All rights reserved.
+    </center>
+</footer>
+
 
 
 

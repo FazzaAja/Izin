@@ -205,11 +205,12 @@
                               <div class="image">
                                 <label for="">Foto Keluar</label><br>
                                 @if ($izin->keluar)
+                                <br>
                                 <img
-                                  src="../../dist/img/lol.jpg"
+                                  src="{{ url('storage/'.$izin->keluar) }}"
                                   class="img mr-2 text-primary "
                                   alt="User Image"
-                                  width="100" height="150"
+                                  height="300"
                                 /> 
                                   
                                 @else
@@ -230,11 +231,12 @@
                               <div class="image">
                                 <label for="">Foto Kembali</label><br>
                                 @if ($izin->kembali)
+                                <br>
                                 <img
-                                  src="../../dist/img/lol.jpg"
+                                  src=""
                                   class="img mr-2 text-primary "
                                   alt="User Image"
-                                  width="100" height="150"
+                                  width="200" height="300"
                                 /> 
                                   
                                 @else

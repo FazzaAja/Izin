@@ -13,13 +13,8 @@ class Murid extends Model implements Authenticatable
 
     public $table = "murid";
 
-    use HasFactory;
-
-    
-
     protected $fillable = [
         'nama',
-        'password',
         'nisn',
         'nipd',
         'kelas',
@@ -31,7 +26,6 @@ class Murid extends Model implements Authenticatable
     ];
 
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 

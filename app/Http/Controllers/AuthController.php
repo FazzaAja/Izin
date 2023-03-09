@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Piket;
 use App\Models\Murid;
 use App\Models\Izin;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -19,14 +21,6 @@ class AuthController extends Controller
         return view('piket.dashboard', [ 'listPiket' => $piket, 'listMurid' => $murid, 'listIzin' => $izin ]);
     }
 
-    public function profile()
-    {
-        $murid = Murid::all();
-        $piket = Piket::all();
-        $izin = Izin::all();
-        return view('murid.profile', [ 'listPiket' => $piket, 'listMurid' => $murid, 'listIzin' => $izin ]);
-    }
-
     public function index()
     {   
         $murid = Murid::all();
@@ -36,27 +30,37 @@ class AuthController extends Controller
 
     public function loginPiket(Request $request)
     {
-        $credentials = $request->validate([
-            'nama' => 'required',
-            'password' => 'required',
-        ]);
+        // $request->validate(['nama' => 'required', 'password' => 'required']);
 
-        if(Auth::guard('piket')->attempt($credentials))
+        // // dd($request->validate(['nama' => 'required', 'password' => 'required']));
+        // dd(Auth::guard('piket')->attempt(['nama' => $request->nama, 'password' => $request->password]));
+        // if (Auth::guard('piket')->attempt(['nama' => $request->nama, 'password' => $request->password])) {
+        //     $request->session()->regenerate();
+        //     return redirect()->intended('dash');
+        // }
+
+        // return back()->with('gagal', 'Login Gagal!');
+
+        $piket = Piket::where('nama', '=', $request->nama)->first();
+        
+        if($piket && Hash::check($request->password, $piket->password))
         {
-            $request->session()->regenerate();
+            Auth::guard('piket')->login($piket);
             return redirect()->intended('/dashboard');
-        };
+        }
 
         return back()->with('gagal', 'Login Gagal!');
     }
 
     public function loginMurid(Request $request)
     {
-        $nisn = $request->input('nisn');
         $nama = $request->input('nama');
 
-        if (Auth::attempt(['nisn' => $nisn, 'nama' => $nama]))
+        $murid = Murid::where('nama', $nama)->first();
+
+        if ($murid)
         {
+            Auth::guard('murid')->login($murid);
             return redirect('/profile');
         };
 

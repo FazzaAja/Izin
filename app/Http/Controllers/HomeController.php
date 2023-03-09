@@ -20,27 +20,6 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -51,37 +30,63 @@ class HomeController extends Controller
         return view('home-detail' ,compact('izin'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    // public function profile()
+    // {
+    //     $murid = Murid::all();
+    //     $piket = Piket::all();
+    //     $izin = Izin::all();
+    //     return view('murid.profile', [ 'listPiket' => $piket, 'listMurid' => $murid, 'listIzin' => $izin ]);
+    // }
+
+    public function profile()
     {
-        //
+        $izin = Izin::where('murid_id', '=', auth('murid')->user()->id)->with('murid')->latest()->get();
+        return view('murid.profile',['listIzin' => $izin]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function detail(Izin $izin)
     {
-        //
+        return view('murid.detail' ,compact('izin'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function foto(Request $request, Izin $izin)
     {
-        //
+        $requestData = $request->all();
+
+        $request->validate([
+            'keluar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'kembali' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $path = '';
+
+        if ($request->file('keluar')) {
+            if ($izin->keluar) {
+                unlink(public_path('/storage/' . $izin->keluar));
+            }
+            $extension = $request->file('keluar')->getClientOriginalExtension();
+            $newName = now()->timestamp . '.' . $extension;
+            $path = $request->file('keluar')->storeAs('keluar', $newName);
+            $requestData['keluar'] = $path;
+        } else {
+            unset($requestData['keluar']);
+        }
+
+        $izin->update($requestData);
+
+
+        // $newName = '';
+
+        // if ($request->file('keluar')){
+        //     $extentsion = $request->file('keluar')->getClientOriginalExtension();
+        //     $newName = now()->timestamp.'.'.$extentsion;
+        //     $request->file('keluar')->storeAs('keluar', $newName);
+        // }
+
+        // $izin['keluar'] = $newName;
+        // $izin->update($request->all());
+
+
+        return redirect()->back();
     }
 }

@@ -6,6 +6,20 @@
 <br>
 <main class="login-form">
    <div class="cotainer">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+         <div class="container-fluid">
+           <div class="row">
+             <div class="col-sm-6">
+               <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                 <li class="breadcrumb-item active">Login</li>
+               </ol>
+             </div>
+           </div>
+         </div>
+         <!-- /.container-fluid -->
+       </section>
       <center>
             <div class="col-md-4">
                <div class="card">
@@ -18,6 +32,9 @@
                         <div class="title signup">
                            Piket
                         </div>
+                        @if ($message = Session::get('gagal'))
+                           <div id="gagal"></div>
+                        @endif
                      </div>
                      <div class="form-container">
                         <div class="slide-controls">
@@ -43,16 +60,6 @@
                                  @endforeach
                               </select>
                                  </div>
-                                 <div class="field">
-                                    <input
-                                       type="number"
-                                       name="nisn"
-                                       class="form-control"
-                                       id="nisn"
-                                       placeholder="Masukan NISN"
-                                       required
-                                       />
-                                    </div>
                               <div class="field btn">
                                  <button class="btn btn-primary">Masuk</button>
                               </div>

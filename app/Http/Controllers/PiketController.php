@@ -34,7 +34,7 @@ class PiketController extends Controller
             'password' => 'required|confirmed|min:6'
         ]);
 
-        $data['password'] = Hash::make($data['password']);
+        $data['password'] = bcrypt($data['password']);
 
         Piket::create($data);
         return redirect()->route('piket.index')->with('successAddPiket', 'Sukses Menambah Piket.');

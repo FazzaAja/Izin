@@ -15,11 +15,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 
+// Murid Access
+Route::middleware(['auth:murid'])->group(function() {
+
+    Route::get('/profile', 'App\Http\Controllers\HomeController@profile')->name('profile');
+    Route::get('/profile/{izin}', 'App\Http\Controllers\HomeController@detail')->name('detail');   
+    Route::put('/profile/{izin}', 'App\Http\Controllers\HomeController@foto')->name('foto');   
+
+});
+
 // Piket Access
 Route::middleware(['auth:piket'])->group(function () {
     // Dashboard
     Route::get('/dashboard', 'App\Http\Controllers\AuthController@dash')->name('dash');
-
+    
     // Murid Route
     Route::get('/murid', 'App\Http\Controllers\PiketMuridController@index')->name('murid.index');
     Route::get('/murid/tambah-murid', 'App\Http\Controllers\PiketMuridController@create')->name('murid.create');
@@ -42,7 +51,7 @@ Route::middleware(['auth:piket'])->group(function () {
     Route::get('/piket', 'App\Http\Controllers\PiketController@index')->name('piket.index');
     Route::post('/piket/', 'App\Http\Controllers\PiketController@store')->name('piket.store');
     Route::delete('/piket/{piket}', 'App\Http\Controllers\PiketController@destroy')->name('piket.destroy');
-
+    
     // Izin Route
     Route::get('/izin', 'App\Http\Controllers\PiketIzinController@index')->name('izin.index');
     Route::get('/tambah-izin', 'App\Http\Controllers\PiketIzinController@create')->name('izin.create');
@@ -63,5 +72,4 @@ Route::post('/logout/', 'App\Http\Controllers\AuthController@logout')->name('log
 
 // Public View
 Route::get('/{izin}', 'App\Http\Controllers\HomeController@show')->name('show');
-Route::get('/profile', 'App\Http\Controllers\AuthController@profile')->name('profile');
 
