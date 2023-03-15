@@ -16,6 +16,7 @@ class Izin extends Model
         'alasan',
         'keluar',
         'kembali',
+        'uploaded_at',
         'status',
         'piket_id',
     ];

@@ -233,11 +233,12 @@
                                 @if ($izin->kembali)
                                 <br>
                                 <img
-                                  src=""
+                                  src="{{ url('storage/'.$izin->kembali) }}"
                                   class="img mr-2 text-primary "
                                   alt="User Image"
-                                  width="200" height="300"
+                                  height="300"
                                 /> 
+                                <p>Kembali pada waktu : {{ \Carbon\Carbon::parse($izin->uploaded_at)->translatedFormat('l d, H:i') }}</p>
                                   
                                 @else
                                 <img
@@ -246,7 +247,7 @@
                                   alt="Foto Kembali"
                                   width="100" height="150"
                                 /> 
-                                  
+                              
                                 @endif
   
                               </div>

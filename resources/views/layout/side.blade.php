@@ -70,7 +70,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-solid fa-clock"></i>
               <p>
-                Keterlambatan
+                Keterlambatan <sup style="font-size: 10px">(Coming Soon)</sup>
               </p>
             </a>
           </li>

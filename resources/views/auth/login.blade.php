@@ -48,7 +48,7 @@
                         <div class="form-inner">
                            <form action="{{ route('login.murid') }}" class="login" method="post">
                               @csrf
-                              <div class="field">
+                              <div class="field" style="text-align: left;">
                                  <select
                                  class="select2 form-control"
                                  name="nama"
@@ -59,6 +59,16 @@
                                  <option value="{{ $murid->nama }}" >{{ ucwords(strtolower($murid->nama)) }}</option>
                                  @endforeach
                               </select>
+                                 </div>
+                                 <div class="field">
+                                    <input
+                                    type="number"
+                                    name="nisn"
+                                    class="form-control"
+                                    id="nisn"
+                                    placeholder="Masukan NISN"
+                                    required
+                                    />
                                  </div>
                               <div class="field btn">
                                  <button class="btn btn-primary">Masuk</button>

@@ -63,6 +63,8 @@
                 
                 @endforeach
 
+                {!! $listIzin->withQueryString()->links('pagination::bootstrap-5') !!}
+
               @else
 
               <div class="card bg-gradient-secondary">

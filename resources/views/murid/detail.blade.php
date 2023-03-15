@@ -215,6 +215,38 @@
                                 <img
                                   src="../../dist/img/square-plus-regular.svg"
                                   class="img mr-2 text-primary img-preview"
+                                  alt="Icon Plus"
+                                  height="300"
+                                /> 
+                                  
+                                @endif
+                                </label>
+                              </div>
+                            </center>
+                          </div>
+                          @if ($izin->keluar)
+                          <div class="col-sm-6 invoice-col">
+                            <br>
+                            <center>
+                              <div class="image">
+                                <input type="file" name="kembali" id="kembali" onchange="previewImage2()" style="display: none">
+                                <label for="kembali">Foto Kembali<br>
+                                @if ($izin->kembali)
+                                <br>
+                                <img
+                                  src="{{ url('storage/'.$izin->kembali) }}"
+                                  class="img mr-2 text-primary img-preview-2"
+                                  alt="Icon Plus"
+                                  height="300"
+                                /> 
+                                <br>
+                                <p>Kembali pada waktu : {{ \Carbon\Carbon::parse($izin->uploaded_at)->translatedFormat('l d, H:i') }}</p>
+                                  
+                                @else
+                                <br>
+                                <img
+                                  src="../../dist/img/square-plus-regular.svg"
+                                  class="img mr-2 text-primary img-preview-2"
                                   alt="Foto Keluar"
                                   height="300"
                                 /> 
@@ -224,32 +256,7 @@
                               </div>
                             </center>
                           </div>
-                          <div class="col-sm-6 invoice-col">
-                            <br>
-                            <center>
-                              <div class="image">
-                                <label for="">Foto Kembali</label><br>
-                                @if ($izin->kembali)
-                                <img
-                                  src="../../dist/img/lol.jpg"
-                                  class="img mr-2 text-primary "
-                                  alt="User Image"
-                                  width="100" height="150"
-                                /> 
-                                  
-                                @else
-                                <img
-                                  src="../../dist/img/square-plus-regular.svg"
-                                  class="img mr-2 text-primary "
-                                  alt="Foto Kembali"
-                                  width="100" height="150"
-                                /> 
-                                  
-                                @endif
-  
-                              </div>
-                            </center>
-                          </div>
+                          @endif
                         </div>
                         <div class="row invoice-info">
                           <div class="col-sm-12 invoice-col">

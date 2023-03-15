@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         $murid = Murid::where('nama', $nama)->first();
 
-        if ($murid)
+        if ($murid && $murid->nisn == $request->nisn)
         {
             Auth::guard('murid')->login($murid);
             return redirect('/profile');

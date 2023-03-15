@@ -13,10 +13,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $izin = Izin::with('murid', 'piket')->latest()->get();
-        return view('home', ['listIzin' => $izin]);
+        $izin = Izin::with('murid', 'piket')->latest()->paginate(10);
+
+
+        return view('home', ['listIzin' => $izin], compact('izin'));
     }
 
     /**
@@ -29,14 +31,6 @@ class HomeController extends Controller
     {
         return view('home-detail' ,compact('izin'));
     }
-
-    // public function profile()
-    // {
-    //     $murid = Murid::all();
-    //     $piket = Piket::all();
-    //     $izin = Izin::all();
-    //     return view('murid.profile', [ 'listPiket' => $piket, 'listMurid' => $murid, 'listIzin' => $izin ]);
-    // }
 
     public function profile()
     {
@@ -72,21 +66,24 @@ class HomeController extends Controller
             unset($requestData['keluar']);
         }
 
+        if ($request->file('kembali')) {
+            if ($izin->kembali) {
+                unlink(public_path('/storage/' . $izin->kembali));
+            }
+            $extension = $request->file('kembali')->getClientOriginalExtension();
+            $newName = now()->timestamp . '.' . $extension;
+            $path = $request->file('kembali')->storeAs('kembali', $newName);
+            $requestData['kembali'] = $path;
+            $izin->update(['status' => 'Sudah Kembali']);
+            $izin->save();
+        } else {
+            unset($requestData['kembali']);
+        }
+
+        $izin->uploaded_at = now();
+
         $izin->update($requestData);
 
-
-        // $newName = '';
-
-        // if ($request->file('keluar')){
-        //     $extentsion = $request->file('keluar')->getClientOriginalExtension();
-        //     $newName = now()->timestamp.'.'.$extentsion;
-        //     $request->file('keluar')->storeAs('keluar', $newName);
-        // }
-
-        // $izin['keluar'] = $newName;
-        // $izin->update($request->all());
-
-
-        return redirect()->back();
+        return redirect()->route('profile');
     }
 }

@@ -26,7 +26,7 @@
 
   
 </head>
-<body class="hold-transition layout-top-nav ">
+<body class="hold-transition layout-top-nav">
   {{-- <div class="wrapper"> --}}
       @include('template.nav')
       @yield('content')
@@ -53,8 +53,18 @@
                   imgPreview.src = oFREvent.target.result;
                }
             }
+   function previewImage2(){
+               const image = document.querySelector('#kembali');
+               const imgPreview = document.querySelector('.img-preview-2');
+               imgPreview.style.display = 'block';
+               const oFReader = new FileReader();
+               oFReader.readAsDataURL(image.files[0]);
+               oFReader.onload = function(oFREvent) {
+                  imgPreview.src = oFREvent.target.result;
+               }
+            }
          $(function () {
-
+            
                //SweetAlert2 Modal
             $(function () {
                var Toast = Swal.mixin({
@@ -66,10 +76,10 @@
 
                $(document).ready(function () {
                   if ($("#gagal").length) {
-                     Toast.fire({
-                     icon: "error",
+                     Toast.fire({              
+                        icon: "error",
                      title: "Login Gagal.",
-                     });
+   });
                   }
                   })
                });
