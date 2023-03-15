@@ -88,19 +88,8 @@
                     required
                   />
                 </div>
-                <div class="form-group">
-                    {{-- <label for="status">Status</label>
-                    <select
-                      class="form-control"
-                      name="status"
-                      id="status"
-                     >
-                        <option>Sedang Izin</option>
-                        <option>Sudah Kembali</option>
-                        <option>Sudah Pulang</option>
-                        <option>Tanpa Keterangan</option>
-                    </select> --}}
-                    <input type="hidden" name="status" value="Sedang Izin">
+                <div class="form-group">    
+                    <input type="hidden" name="status" value="Izin">
                 </div>
 
               <div class="card-footer text-right">

@@ -47,7 +47,10 @@
                   <tr>
                     <th>Nama</th>
                     <th>NIP</th>
+                    @if ($listPiket->count() == 1)
+                    @else
                     <th>#</th>
+                    @endif                    
                   </tr>
                 </thead>
                 <tbody>
@@ -56,16 +59,19 @@
                     <td>{{ ($piket->nama) }}</td>
                     <td>{{ $piket->nip }}</td>
                     
-                    <td>
+                    @if ($piket->count() == 1)
+                    
+                      @else
+                      <td>
                       <form action="{{ route('piket.destroy', $piket->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#example">
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#example-{{ $piket->id }}">
                           <i class="fas fa-solid fa-trash fa-xs"></i>
                         </button>
                         
                         <!-- Modal -->
-                        <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="example-{{ $piket->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -86,6 +92,7 @@
                         </div>
                       </form>
                     </td>
+                    @endif
                   </tr>
                   @endforeach
                 </tbody>

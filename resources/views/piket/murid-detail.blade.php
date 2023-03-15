@@ -108,11 +108,11 @@
               <div class="col-md-7 " id="accordion">
                 @foreach ($listIzin as $izin)
                 <div class="card
-                @if ($izin->status == 'Sudah Kembali')
+                @if ($izin->status == 'Selesai')
                 card-success
-                @elseif ($izin->status == 'Sudah Pulang')
-                card-success
-                @elseif ($izin->status == 'Tanpa Keterangan')
+                @elseif ($izin->status == 'Proses')
+                card-info
+                @elseif ($izin->status == 'kabur')
                 card-danger
                 @else
                 card-warning

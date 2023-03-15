@@ -65,11 +65,11 @@
                         <tr>
                           <td><a href="{{ route('izin.show', $izin->id) }}">{{ ucwords(strtolower($izin->murid['nama'])) }}</a></td>
                           <td><span class="badge badge-pill 
-                          @if ($izin->status == 'Sudah Kembali')
+                          @if ($izin->status == 'Selesai')
                             badge-success
-                          @elseif ($izin->status == 'Sudah Pulang')
-                            badge-success
-                          @elseif ($izin->status == 'Tanpa Keterangan')
+                          @elseif ($izin->status == 'Proses')
+                            badge-info
+                          @elseif ($izin->status == 'Kabur')
                             badge-danger
                           @else
                             badge-warning

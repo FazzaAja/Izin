@@ -173,11 +173,11 @@
                             <br />
                             <b>Piket </b>: {{ ucwords(strtolower($izin->piket->nama)) }} <br>
                             <b>Status </b>: <span class="badge badge-pill 
-                            @if ($izin->status == 'Sudah Kembali')
+                            @if ($izin->status == 'Selesai')
                               badge-success
-                            @elseif ($izin->status == 'Sudah Pulang')
-                              badge-success
-                            @elseif ($izin->status == 'Tanpa Keterangan')
+                            @elseif ($izin->status == 'Proses')
+                              badge-info
+                            @elseif ($izin->status == 'Kabur')
                               badge-danger
                             @else
                               badge-warning
@@ -198,26 +198,28 @@
                             <br>
                             <center>
                               <div class="image">
-                                <input type="file" name="keluar" id="keluar" onchange="previewImage()" style="display: none">
-                                <label for="keluar">Foto Keluar<br>
+                                @if ($izin->keluar)
+                                  
+                                @else
+                                <input type="hidden" name="keluar" id="image">  
+                                @endif
+                                <label>Foto Keluar<br>
                                 {{-- <img class="img-preview" src="#" alt="Preview Photo"> --}}
                                 @if ($izin->keluar)
                                 <br>
                                 <img
                                   src="{{ url('storage/'.$izin->keluar) }}"
-                                  class="img mr-2 text-primary img-preview"
+                                  class="img mr-2 text-primary"
                                   alt="User Image"
                                   height="300"
                                 /> 
                                   
                                 @else
                                 <br>
-                                <img
-                                  src="../../dist/img/square-plus-regular.svg"
-                                  class="img mr-2 text-primary img-preview"
-                                  alt="Icon Plus"
-                                  height="300"
-                                /> 
+                                  <video id="webcamVideo" width="200" height="300" style="border: 1px black solid;" autoplay></video>
+                                  <canvas id="webcamCanvas" width="200" height="300" style="border: 1px black solid;"></canvas>                          
+                                  <button type="button" onclick="ambilGambar();">Capture</button>
+                                  <button type="button" onclick="startCamera();">Mulai Kamera</button>
                                   
                                 @endif
                                 </label>
@@ -229,13 +231,13 @@
                             <br>
                             <center>
                               <div class="image">
-                                <input type="file" name="kembali" id="kembali" onchange="previewImage2()" style="display: none">
+                                <input type="hidden" name="kembali" id="image2">
                                 <label for="kembali">Foto Kembali<br>
                                 @if ($izin->kembali)
                                 <br>
                                 <img
                                   src="{{ url('storage/'.$izin->kembali) }}"
-                                  class="img mr-2 text-primary img-preview-2"
+                                  class="img mr-2 text-primary"
                                   alt="Icon Plus"
                                   height="300"
                                 /> 
@@ -243,14 +245,12 @@
                                 <p>Kembali pada waktu : {{ \Carbon\Carbon::parse($izin->uploaded_at)->translatedFormat('l d, H:i') }}</p>
                                   
                                 @else
+                                
                                 <br>
-                                <img
-                                  src="../../dist/img/square-plus-regular.svg"
-                                  class="img mr-2 text-primary img-preview-2"
-                                  alt="Foto Keluar"
-                                  height="300"
-                                /> 
-                                  
+                                  <video id="webcamVideo2" width="200" height="300" style="border: 1px black solid;" autoplay></video>
+                                  <canvas id="webcamCanvas2" width="200" height="300" style="border: 1px black solid;"></canvas>                          
+                                  <button type="button" onclick="ambilGambar2();">Capture</button>
+                                  <button type="button" onclick="startCamera2();">Mulai Kamera</button>
                                 @endif
                                 </label>
                               </div>

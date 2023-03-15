@@ -172,11 +172,11 @@
                             <br />
                             <b>Piket </b>: {{ ucwords(strtolower($izin->piket->nama)) }} <br>
                             <b>Status </b>: <span class="badge badge-pill 
-                            @if ($izin->status == 'Sudah Kembali')
+                            @if ($izin->status == 'Selesai')
                               badge-success
-                            @elseif ($izin->status == 'Sudah Pulang')
-                              badge-success
-                            @elseif ($izin->status == 'Tanpa Keterangan')
+                            @elseif ($izin->status == 'Proses')
+                              badge-info
+                            @elseif ($izin->status == 'Kabur')
                               badge-danger
                             @else
                               badge-warning

@@ -182,10 +182,11 @@
                                 name="status"
                                 id="status"
                                 >
-                                  <option class="bg-warning" value="{{ $izin->status }}">{{ $izin->status }}</option>
-                                  <option class="bg-success" >Sudah Kembali</option>
-                                  <option class="bg-success">Sudah Pulang</option>
-                                  <option class="bg-danger">Tanpa Keterangan</option>
+                                  <option class="bg-primary" value="{{ $izin->status }}">{{ $izin->status }}</option>
+                                  <option class="bg-success" >Selesai</option>
+                                  <option class="bg-info">Proses</option>
+                                  <option class="bg-warning" >Izin</option>
+                                  <option class="bg-danger">Kabur</option>
                                 </select>
                               </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Izin;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -45,45 +46,32 @@ class HomeController extends Controller
 
     public function foto(Request $request, Izin $izin)
     {
-        $requestData = $request->all();
 
-        $request->validate([
-            'keluar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'kembali' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        if ($request->input('keluar')){
+            $imageData = base64_decode(str_replace('data:image/png;base64,', '', $request->input('keluar')));
+            $newName = time() . '_' . rand(1000, 9999) . '.png';
+            Storage::put('keluar/' . $newName, $imageData);
+            $request['keluar'] = 'keluar/'.$newName;
+            
+            $izin->update($request->all());
 
-        $path = '';
-
-        if ($request->file('keluar')) {
-            if ($izin->keluar) {
-                unlink(public_path('/storage/' . $izin->keluar));
-            }
-            $extension = $request->file('keluar')->getClientOriginalExtension();
-            $newName = now()->timestamp . '.' . $extension;
-            $path = $request->file('keluar')->storeAs('keluar', $newName);
-            $requestData['keluar'] = $path;
-        } else {
-            unset($requestData['keluar']);
+            return redirect()->back();
         }
 
-        if ($request->file('kembali')) {
-            if ($izin->kembali) {
-                unlink(public_path('/storage/' . $izin->kembali));
-            }
-            $extension = $request->file('kembali')->getClientOriginalExtension();
-            $newName = now()->timestamp . '.' . $extension;
-            $path = $request->file('kembali')->storeAs('kembali', $newName);
-            $requestData['kembali'] = $path;
+        if ($request->input('kembali')){
+            $imageData2 = base64_decode(str_replace('data:image/png;base64,', '', $request->input('kembali')));
+            $newName2 = time() . '_' . rand(1000, 9999) . '.png';
+            Storage::put('kembali/' . $newName2, $imageData2);
+            $request['kembali'] = 'kembali/'.$newName2;
             $izin->update(['status' => 'Sudah Kembali']);
-            $izin->save();
-        } else {
-            unset($requestData['kembali']);
+            
+            $izin->uploaded_at = now();
+
+            $izin->update($request->all());
+
+            return redirect()->route('profile');
         }
 
-        $izin->uploaded_at = now();
-
-        $izin->update($requestData);
-
-        return redirect()->route('profile');
     }
+    
 }
