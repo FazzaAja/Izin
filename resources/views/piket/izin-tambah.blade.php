@@ -55,7 +55,11 @@
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Form Tambah Izin</h3>
+              <h3 class="card-title">Form Tambah Izin
+                @if ($message = Session::get('successAdd'))
+                  <div id="add"></div>
+                @endif
+              </h3>
             </div>
             
             <!-- /.card-header -->
@@ -93,7 +97,8 @@
                 </div>
 
               <div class="card-footer text-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name='lanjut' class="btn btn-primary">Submit dan lanjutkan</button>
+                <button type="submit" name='submit' class="btn btn-primary">Submit</button>
               </div>
             </form>
           </div>

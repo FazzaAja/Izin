@@ -217,8 +217,8 @@
                                 @else
                                 <br>
                                   <video id="webcamVideo" width="200" height="300" style="border: 1px black solid;" autoplay></video>
-                                  <canvas id="webcamCanvas" width="200" height="300" style="border: 1px black solid;"></canvas>                          
                                   <button type="button" onclick="ambilGambar();">Capture</button>
+                                  <canvas id="webcamCanvas" width="200" height="300" style="border: 1px black solid;"></canvas>                          
                                   <button type="button" onclick="startCamera();">Mulai Kamera</button>
                                   
                                 @endif

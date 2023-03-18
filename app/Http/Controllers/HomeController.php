@@ -63,7 +63,7 @@ class HomeController extends Controller
             $newName2 = time() . '_' . rand(1000, 9999) . '.png';
             Storage::put('kembali/' . $newName2, $imageData2);
             $request['kembali'] = 'kembali/'.$newName2;
-            $izin->update(['status' => 'Sudah Kembali']);
+            $izin->update(['status' => 'Proses']);
             
             $izin->uploaded_at = now();
 

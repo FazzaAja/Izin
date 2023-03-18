@@ -46,7 +46,13 @@ class PiketIzinController extends Controller
         $izin->status = $request->status;
         $izin->piket_id = $piket;
         $izin->save();
-        return redirect()->route('izin.index')->with('successAdd', 'Sukses Menambah Murid.');
+
+        // cek value dari button yang di-submit
+        if ($request->has('submit')) {
+            return redirect()->route('izin.index')->with('successAdd', 'Sukses Menambah Murid.');
+        } elseif ($request->has('lanjut')) {
+            return redirect()->route('izin.create')->with('successAdd', 'Sukses Menambah Murid.');
+        }
     }
 
     /**
