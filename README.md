@@ -8,12 +8,12 @@
 </p>
 
 ## Clone
+ 
+#### <li> Copy and Rename .env.example and do configuration </li>
 
-#### Copy and Rename .env.example and do configuration
+#### <li> Setting XAMPP php.ini </li>
 
-#### Setting XAMPP php.ini
-
-#### Add new fresh database
+#### <li> Add new fresh database </li>
 
 ```bash
 composer update --no-scripts
