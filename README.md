@@ -31,5 +31,9 @@ php artisan migrate:refresh --seed
 php artisan storage:link
 ```
 
+```bash
+php artisan serve
+```
+
 
 # Izin
