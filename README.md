@@ -9,11 +9,11 @@
 
 ## Clone
 
-### Copy and Rename .env.example and do configuration
+#### Copy and Rename .env.example and do configuration
 
-### Setting XAMPP php.ini
+#### Setting XAMPP php.ini
 
-### Add new fresh database
+#### Add new fresh database
 
 ```bash
 composer update --no-scripts
@@ -27,6 +27,9 @@ composer require maatwebsite/excel
 php artisan migrate:refresh --seed
 ```
 
+```bash
+php artisan storage:link
+```
 
 
 # Izin
