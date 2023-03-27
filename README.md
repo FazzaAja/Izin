@@ -9,5 +9,24 @@
 
 ## Clone
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Copy and Rename .env.example and do configuration
+
+### Setting XAMPP php.ini
+
+### Add new fresh database
+
+```bash
+composer update --no-scripts
+```
+
+```bash
+composer require maatwebsite/excel
+```
+
+```bash
+php artisan migrate:refresh --seed
+```
+
+
+
 # Izin
